@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+latest_version=$(curl -s 'https://go.dev/dl/?mode=json' | \
+    python3 -c "import sys, json; print(json.load(sys.stdin)[0]['version'])")
+
+echo Installing $latest_version
+
+os=$(uname -s | tr '[:upper:]' '[:lower:]')
+arch=$(dpkg --print-architecture)
+
+file_name=$latest_version.$os-$arch.tar.gz
+
+download_url=https://go.dev/dl/$file_name
+
+cd /tmp
+
+curl -LO $download_url
+
+tar -C /usr/local -xzf $file_name
+
+rm $file_name
