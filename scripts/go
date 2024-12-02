@@ -16,6 +16,6 @@ cd /tmp
 
 curl -LO $download_url
 
-tar -C /usr/local -xzf $file_name
+tar -C ~ -xzf $file_name
 
 rm $file_name
